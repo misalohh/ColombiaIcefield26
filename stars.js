@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-export function createStars(count = 20000, minRadius = 3, spread = 50) {
+export function createStars(count = 20000, minRadius = 3.5, spread = 50) {
   const starGeo = new THREE.BufferGeometry();
   const positions = new Float32Array(count * 3);
 
