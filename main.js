@@ -19,8 +19,8 @@ const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 camera.position.z = 2;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x141424);
-scene.fog = new THREE.Fog(0x141424, 1, 10);
+scene.background = new THREE.Color(0x526482);
+scene.fog = new THREE.Fog(0x526482, 1, 13);
 
 const controls = createControls(camera, renderer.domElement);
 

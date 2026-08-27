@@ -4,13 +4,13 @@ export function createIcosahedron() {
   const geo = new THREE.IcosahedronGeometry(1.0, 2);
 
   const mat = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
+    color: 0xffffff,      
     flatShading: true,
   });
   const mesh = new THREE.Mesh(geo, mat);
 
   const wireMat = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
+    color: 0xe1e5fa,
     wireframe: true,
   });
   const wireMesh = new THREE.Mesh(geo, wireMat);

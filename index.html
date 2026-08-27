@@ -3,10 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Getting Started with Three.js</title>
+    <title>ColombiaIcefield26</title>
     <style>
       body {
         margin: 0;
+      }
+      @font-face {
+        font-family: "Smooch_Sans";
+        src: url("Assets/SmoochSans-Regular.ttf") format("truetype");
+      }
+      #overlay {
+        position: absolute;
+        top: 30px;
+        left: 40px;
+        color: #e1e5fa;
+        font-family: "Smooch_Sans", sans-serif;
+        font-size: 70px;
+        pointer-events: none;
       }
     </style>
     <script type="importmap">
@@ -19,6 +32,7 @@
 		</script>
   </head>
   <body>
+    <div id="overlay">COLOMBIA ICEFIELD 26</div>
     <script type="module" src="main.js"></script>
   </body>
 </html>

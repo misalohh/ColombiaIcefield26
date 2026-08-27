@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-export function createStars(count = 20000, minRadius = 3.5, spread = 50) {
+export function createStars(count = 200000, minRadius = 3.5, spread = 50) {
   const starGeo = new THREE.BufferGeometry();
   const positions = new Float32Array(count * 3);
 
@@ -19,6 +19,6 @@ export function createStars(count = 20000, minRadius = 3.5, spread = 50) {
 
   starGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
-  const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.05 });
+  const starMat = new THREE.PointsMaterial({ color: 0xd7deff, size: 0.03 });
   return new THREE.Points(starGeo, starMat);
 }
