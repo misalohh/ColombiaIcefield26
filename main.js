@@ -31,13 +31,23 @@ scene.add(createHemiLight());
 scene.add(createStars());
 
 const slider = document.getElementById("scaleSlider");
-let targetScale = 1;
+const yearCounter = document.getElementById("yearCounter");
+
+const step = parseFloat(slider.step);      
+const minVal = parseFloat(slider.min);
+const maxVal = parseFloat(slider.max);
+const startValue = parseFloat(slider.value); 
+const startYear = 2026;
+
+let targetScale = maxVal - startValue + minVal;
+let currentScale = targetScale;
 
 slider.addEventListener("input", () => {
-  targetScale = parseFloat(slider.value);
+    const value = parseFloat(slider.value); 
+    targetScale = maxVal - value + minVal;
+    const stepsMoved = Math.round((startValue - value) / step);
+    yearCounter.textContent = startYear - stepsMoved;
 });
-
-let currentScale = 1;
 
 function animate() {
   requestAnimationFrame(animate);
@@ -45,7 +55,6 @@ function animate() {
 
   currentScale += (targetScale - currentScale) * 0.1;
   mesh.scale.setScalar(currentScale);
-  // wireMesh untouched, stays fixed at its own scale
 
   renderer.render(scene, camera);
 }
