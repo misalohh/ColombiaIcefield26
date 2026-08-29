@@ -3,19 +3,17 @@ import * as THREE from "three";
 export function createIcosahedron() {
   const geo = new THREE.IcosahedronGeometry(1.0, 2);
 
-  const mat = new THREE.MeshStandardMaterial({
-    color: 0xffffff,      
-    flatShading: true,
+  const mat = new THREE.MeshPhysicalMaterial({
+    color: 0xe0f7fa,
+    transmission: 0.95, 
+    opacity: 1,
+    transparent: true,
+    roughness: 0.1,   
+    thickness: 1.5,  
+    envMapIntensity: 1.5,  
+    ior: 1.305         
   });
   const mesh = new THREE.Mesh(geo, mat);
-
-  const attachedWire = new THREE.MeshBasicMaterial({
-    color: 0x7e7e8c,
-    wireframe: true,
-  })
-  const attachedMesh = new THREE.Mesh(geo, attachedWire);
-  attachedMesh.scale.setScalar(1.001);
-  mesh.add(attachedMesh);
 
   const wireMat = new THREE.MeshBasicMaterial({
     color: 0xe1e5fa,

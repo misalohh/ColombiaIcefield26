@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+}
+
+@font-face {
+  font-family: "Smooch_Sans";
+  src: url("Assets/SmoochSans-Regular.ttf") format("truetype");
+}
+
+#overlay {
+  position: absolute;
+  top: 30px;
+  left: 40px;
+  color: #e1e5fa;
+  font-family: "Smooch_Sans", sans-serif;
+  font-size: 80px;
+  pointer-events: none;
+}
+
+#scaleSlider {
+  position: absolute;
+  top: 600px;
+  right: 50px;
+  width: 200px;
+}
+
+#yearLabel {
+  position: absolute;
+  top: 560px;
+  right: 55px;
+  color: #e1e5fa;
+  font-family: "Smooch_Sans", sans-serif;
+  font-size: 35px;
+}
+
+#yearCounter {
+  position: absolute;
+  top: 610px;
+  right: 50px;
+  color: #e1e5fa;
+  font-family: "Smooch_Sans", sans-serif;
+  font-size: 200px;
+}
+
+#controls {
+  position: absolute;
+  top: 150px;
+  right: 1200px;
+  color: #e1e5fa;
+  font-family: "Smooch_Sans", sans-serif;
+  font-size: 30px;
+  width: 220px;
+}
+
+#controls label {
+  display: block;
+}
+
+#controls input[type="range"] {
+  display: block;
+  width: 100%;
+}
