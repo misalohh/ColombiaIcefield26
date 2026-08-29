@@ -1,8 +1,32 @@
 import * as THREE from "three";
+
 import { createIcosahedron } from "./mesh.js";
 import { createHemiLight } from "./lights.js";
 import { createStars } from "./stars.js";
 import { createControls } from "./controls.js";
+import { calculateIcePercent } from "./climate.js";
+
+let climateData = [];
+
+async function loadClimateData() {
+  const response = await fetch("/temp.csv");
+  const text = await response.text();
+  const rows = text.trim().split("\n");
+
+  climateData = rows.slice(1).map(row => {
+    const values = row.split(",");
+
+    return {
+      year: Number(values[0]),
+      rcp2_6: Number(values[1]),
+      rcp4_5: Number(values[2]),
+      rcp8_5: Number(values[3])
+    };
+  });
+
+  console.log(climateData);
+  setupSlider();
+}
 
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -32,6 +56,7 @@ scene.add(createStars());
 
 const slider = document.getElementById("scaleSlider");
 const yearCounter = document.getElementById("yearCounter");
+const percentRemaining = document.getElementById("percentRemaining");
 
 const step = parseFloat(slider.step);      
 const minVal = parseFloat(slider.min);
@@ -39,15 +64,45 @@ const maxVal = parseFloat(slider.max);
 const startValue = parseFloat(slider.value); 
 const startYear = 2026;
 
-let targetScale = maxVal - startValue + minVal;
-let currentScale = targetScale;
+const scenario = "rcp4_5";
 
-slider.addEventListener("input", () => {
-    const value = parseFloat(slider.value); 
-    targetScale = maxVal - value + minVal;
-    const stepsMoved = Math.round((startValue - value) / step);
-    yearCounter.textContent = startYear - stepsMoved;
-});
+let targetScale = 1;
+let currentScale = 1;
+
+function updateIce(year) {
+    const icePercent = calculateIcePercent(climateData, scenario, year);
+    const scale = Math.cbrt(icePercent / 100); //cube root to scale as V ∝ linear dimension
+    targetScale = scale;
+
+    yearCounter.textContent = year;
+    if (icePercent.toFixed(0) == 100){
+        percentRemaining.textContent = icePercent.toFixed(0) + "%";
+    }
+    else{
+        percentRemaining.textContent = icePercent.toFixed(1) + "%";
+    }
+    
+    console.log(
+        "Year:", year,
+        "Ice remaining:", icePercent.toFixed(2) + "%"
+    );
+}
+
+
+function setupSlider() {
+
+    slider.addEventListener("input", () => {
+
+        const value = parseFloat(slider.value);
+        const stepsMoved = Math.round((startValue - value) / step);
+        const year = startYear - stepsMoved;
+
+        updateIce(year);
+    });
+
+    updateIce(2026);
+}
+
 
 function animate() {
   requestAnimationFrame(animate);
@@ -59,3 +114,5 @@ function animate() {
   renderer.render(scene, camera);
 }
 animate();
+
+loadClimateData();

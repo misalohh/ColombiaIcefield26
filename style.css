@@ -42,6 +42,15 @@ body {
   font-size: 200px;
 }
 
+#percentRemaining {
+  position: absolute;
+  top: 720px;
+  right: 390px;
+  color: #e1e5fa;
+  font-family: "Smooch_Sans", sans-serif;
+  font-size: 80px;
+}
+
 #controls {
   position: absolute;
   top: 150px;
