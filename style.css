@@ -17,6 +17,16 @@ body {
   pointer-events: none;
 }
 
+#warmingLabel {
+  position: absolute;
+  top: 145px;
+  left: 51px;
+  color: #e1e5fa;
+  font-family: "Smooch_Sans", sans-serif;
+  font-size: 35px;
+  pointer-events: none;
+}
+
 #scaleSlider {
   position: absolute;
   top: 600px;
@@ -51,21 +61,21 @@ body {
   font-size: 80px;
 }
 
-#controls {
-  position: absolute;
-  top: 150px;
-  right: 1200px;
-  color: #e1e5fa;
+.scenarioSlider {
+  position: fixed;
+  top: 200px;     
+  left: 50px;
+  width: 200px;
+  z-index: 10;
   font-family: "Smooch_Sans", sans-serif;
-  font-size: 30px;
-  width: 220px;
 }
-
-#controls label {
-  display: block;
-}
-
-#controls input[type="range"] {
-  display: block;
+.scenarioSlider input[type="range"] {
   width: 100%;
+}
+.scenarioLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  color: #e1e5fa;
+  margin-top: 4px;
 }

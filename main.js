@@ -4,7 +4,7 @@ import { createIcosahedron } from "./mesh.js";
 import { createHemiLight } from "./lights.js";
 import { createStars } from "./stars.js";
 import { createControls } from "./controls.js";
-import { calculateIcePercent } from "./climate.js";
+import { calculateIcePercent } from "./climateModel.js";
 
 let climateData = [];
 
@@ -57,6 +57,7 @@ scene.add(createStars());
 const slider = document.getElementById("scaleSlider");
 const yearCounter = document.getElementById("yearCounter");
 const percentRemaining = document.getElementById("percentRemaining");
+const scenarioSlider = document.getElementById("scenarioSlider");
 
 const step = parseFloat(slider.step);      
 const minVal = parseFloat(slider.min);
@@ -64,13 +65,25 @@ const maxVal = parseFloat(slider.max);
 const startValue = parseFloat(slider.value); 
 const startYear = 2026;
 
-const scenario = "rcp4_5";
+let currentYear = 2026;
+let currentScenario = "rcp4_5"; 
+
+scenarioSlider.addEventListener("input", () => {
+  if (scenarioSlider.value == 0) {
+    currentScenario = "rcp2_6";
+  } else if (scenarioSlider.value == 1) {
+    currentScenario = "rcp4_5";
+  } else if (scenarioSlider.value == 2) {
+    currentScenario = "rcp8_5";
+  }
+  updateIce(currentYear);
+});
 
 let targetScale = 1;
 let currentScale = 1;
 
 function updateIce(year) {
-    const icePercent = calculateIcePercent(climateData, scenario, year);
+    const icePercent = calculateIcePercent(climateData, currentScenario, year);
     const scale = Math.cbrt(icePercent / 100); //cube root to scale as V ∝ linear dimension
     targetScale = scale;
 
@@ -90,14 +103,13 @@ function updateIce(year) {
 
 
 function setupSlider() {
-
     slider.addEventListener("input", () => {
 
         const value = parseFloat(slider.value);
         const stepsMoved = Math.round((startValue - value) / step);
-        const year = startYear - stepsMoved;
+        currentYear = startYear - stepsMoved;
 
-        updateIce(year);
+        updateIce(currentYear);
     });
 
     updateIce(2026);

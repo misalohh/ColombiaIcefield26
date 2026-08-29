@@ -17,6 +17,8 @@
   <body>
     <div id="overlay">COLOMBIA ICEFIELD 26</div>
 
+    <div id="warmingLabel">Level of warming</div>
+
     <input type="range" id="scaleSlider" min="0" max="1" step="0.01" value="0" />
 
     <div id="yearLabel">Projected Year</div>
@@ -25,13 +27,13 @@
 
     <div id="percentRemaining">100</div>
 
-    <div id="controls">
-      <label>CO₂ Emissions
-        <input type="range" id="co2Slider" min="0" max="1" step="0.01" value="0.5" />
-      </label>
-      <label>Snowfall Rate
-        <input type="range" id="tempSlider" min="0" max="1" step="0.01" value="0.5" />
-      </label>
+    <div class="scenarioSlider">
+        <input type="range" id="scenarioSlider" min="0" max="2" step="1" value="1" />
+        <div class="scenarioLabels">
+            <span>Low</span>
+            <span>Medium</span>
+            <span>High</span>
+        </div>
     </div>
 
     <script type="module" src="main.js"></script>
